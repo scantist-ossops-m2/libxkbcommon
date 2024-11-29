@@ -242,7 +242,7 @@ ExprAppendMultiKeysymList(ExprDef *expr, ExprDef *append)
     darray_steal(append->keysym_list.syms, &syms, NULL);
     darray_append_items(expr->keysym_list.syms, syms, numEntries);
 
-    FreeStmt((ParseCommon *) &append);
+    FreeStmt((ParseCommon *) append);
 
     return expr;
 }
