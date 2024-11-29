@@ -264,7 +264,14 @@ XkbMapConfig    :       OptFlags FileType OptMapName OBRACE
                             DeclList
                         CBRACE SEMI
                         {
-                            $$ = XkbFileCreate($2, $3, $5, $1);
+                            if ($2 == FILE_TYPE_GEOMETRY) {
+                                free($3);
+                                FreeStmt($5);
+                                $$ = NULL;
+                            }
+                            else {
+                                $$ = XkbFileCreate($2, $3, $5, $1);
+                            }
                         }
                 ;
 
